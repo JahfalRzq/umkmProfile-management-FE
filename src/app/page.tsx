@@ -1,103 +1,151 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  return (
+    <div className="relative min-h-screen flex items-center justify-center bg-black">
+      {/* Background */}
+      <Image
+        src="/background-linktree.jpeg"
+        alt="Pukis Background"
+        fill
+        priority
+        className="object-cover brightness-75"
+      />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Konten */}
+      <div className="relative z-10 w-full max-w-md mx-auto px-6 py-10 text-center">
+        <Image
+          src="/logo-pukis.jpeg"
+          alt="UMKM Pukis"
+          width={100}
+          height={100}
+          className="rounded-full mx-auto border-4 border-white shadow-lg"
+        />
+        <h1 className="text-white text-3xl font-bold mt-4">Pukis Lezat UMKM</h1>
+        <p className="text-white/80 text-sm mt-1">
+          Rasa Tradisional, Bikin Nagih!
+        </p>
+
+        <div className="mt-8 space-y-4">
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="https://wa.me/6281234567890"
+            className="block w-full bg-white text-gray-900 font-semibold py-3 rounded-2xl shadow hover:bg-gray-200 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            Website
           </a>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="https://instagram.com/umkm_pukis"
+            className="block w-full bg-white text-gray-900 font-semibold py-3 rounded-2xl shadow hover:bg-gray-200 transition"
           >
-            Read our docs
+            Instagram
+          </a>
+          <a
+            href="/tiktok"
+            className="block w-full bg-white text-gray-900 font-semibold py-3 rounded-2xl shadow hover:bg-gray-200 transition"
+          >
+            Tiktok
+          </a>
+
+          {/* Tombol buka modal */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="block w-full bg-white text-gray-900 font-semibold py-3 rounded-2xl shadow hover:bg-gray-200 transition"
+          >
+            Online Shop
+          </button>
+
+          <a
+            href="/location"
+            className="block w-full bg-white text-gray-900 font-semibold py-3 rounded-2xl shadow hover:bg-gray-200 transition"
+          >
+            Location (Google Maps)
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+{/* Modal */}
+{isModalOpen && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+    <div className="bg-white rounded-2xl p-6 w-80 text-center shadow-xl">
+      <h2 className="text-lg font-bold mb-4 text-gray-800">Pilih Online Shop</h2>
+
+      <div className="space-y-4">
+    {/* GoFood */}
+<a
+  href="https://gofood.link/umkm-pukis"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-green-500 text-green-600 font-semibold py-3 px-4 rounded-2xl hover:bg-green-50 transition shadow-sm"
+>
+  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 flex-shrink-0">
+    <Image
+      src="/icons/gofood.png"
+      alt="GoFood"
+      width={24}
+      height={24}
+      className="object-contain"
+    />
+  </div>
+  <span className="text-base">GoFood</span>
+</a>
+
+{/* Shopee Food */}
+<a
+  href="https://shopeefood.link/umkm-pukis"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-orange-500 text-orange-600 font-semibold py-3 px-4 rounded-2xl hover:bg-orange-50 transition shadow-sm"
+>
+  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 flex-shrink-0">
+    <Image
+      src="/icons/shopeefood.png"
+      alt="Shopee Food"
+      width={24}
+      height={24}
+      className="object-contain"
+    />
+  </div>
+  <span className="text-base">Shopee Food</span>
+</a>
+
+{/* GrabFood */}
+<a
+  href="https://grab.link/umkm-pukis"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-green-600 text-green-700 font-semibold py-3 px-4 rounded-2xl hover:bg-green-50 transition shadow-sm"
+>
+  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 flex-shrink-0">
+    <Image
+      src="/icons/grabfood.png"
+      alt="GrabFood"
+      width={24}
+      height={24}
+      className="object-contain"
+    />
+  </div>
+  <span className="text-base">GrabFood</span>
+</a>
+
+      </div>
+
+      {/* Tombol Tutup */}
+      <button
+        onClick={() => setIsModalOpen(false)}
+        className="mt-6 px-4 py-2 bg-gray-600 rounded-lg hover:bg-gray-400 transition text-white"
+      >
+        Tutup
+      </button>
+    </div>
+  </div>
+)}
     </div>
   );
 }
