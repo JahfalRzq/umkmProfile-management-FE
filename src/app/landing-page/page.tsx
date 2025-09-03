@@ -1,34 +1,76 @@
-// src/app/landing-page/page.tsx
 "use client";
 import Image from "next/image";
-import { useState } from "react";
-import { Menu } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, MapPin, Truck, Gift, UserPlus, Phone } from "lucide-react";
 
 export default function LandingPage() {
   const [openMenu, setOpenMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Smooth scroll to section
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setOpenMenu(false); // Close mobile menu after clicking
+    }
+  };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800">
       {/* Navbar */}
-      <header className="w-full bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-2xl font-bold text-orange-500">
-            Order<span className="text-black">UK</span>
+      <header className={`w-full bg-white shadow-lg sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled ? "py-2" : "py-4"
+      }`}>
+        <div className="container mx-auto flex justify-between items-center px-6">
+          <h1 className="text-2xl font-bold text-orange-500 flex items-center gap-1">
+            <span>Pukis</span>
+            <span className="text-black">Ipeng</span>
           </h1>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
-            <a href="#" className="hover:text-orange-500">Home</a>
-            <a href="#" className="hover:text-orange-500">Browse Menu</a>
-            <a href="#" className="hover:text-orange-500">Special Offers</a>
-            <a href="#" className="hover:text-orange-500">Restaurants</a>
-            <a href="#" className="hover:text-orange-500">Track Order</a>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex space-x-8 text-gray-700 font-medium">
+            <button 
+              onClick={() => scrollToSection("hero")} 
+              className="hover:text-orange-500 transition"
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => scrollToSection("outlets")} 
+              className="hover:text-orange-500 transition"
+            >
+              Outlets
+            </button>
+            <button 
+              onClick={() => scrollToSection("menu")} 
+              className="hover:text-orange-500 transition"
+            >
+              Menu
+            </button>
+         
+            <button 
+              onClick={() => scrollToSection("order")} 
+              className="hover:text-orange-500 transition"
+            >
+              Order Now
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
             onClick={() => setOpenMenu(!openMenu)}
+            className="md:hidden text-gray-700"
           >
             <Menu size={28} />
           </button>
@@ -36,235 +78,296 @@ export default function LandingPage() {
 
         {/* Mobile Nav */}
         {openMenu && (
-          <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-3">
-            <a href="#" className="block text-gray-700">Home</a>
-            <a href="#" className="block text-gray-700">Browse Menu</a>
-            <a href="#" className="block text-gray-700">Special Offers</a>
-            <a href="#" className="block text-gray-700">Restaurants</a>
-            <a href="#" className="block text-gray-700">Track Order</a>
+          <div className="md:hidden bg-white border-t shadow-md px-6 py-4 space-y-3">
+            <button 
+              onClick={() => scrollToSection("hero")} 
+              className="block text-gray-700 hover:text-orange-500 transition w-full text-left"
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => scrollToSection("outlets")} 
+              className="block text-gray-700 hover:text-orange-500 transition w-full text-left"
+            >
+              Outlets
+            </button>
+            <button 
+              onClick={() => scrollToSection("menu")} 
+              className="block text-gray-700 hover:text-orange-500 transition w-full text-left"
+            >
+              Menu
+            </button>
+            <button 
+              onClick={() => scrollToSection("order")} 
+              className="block text-gray-700 hover:text-orange-500 transition w-full text-left"
+            >
+              Order Now
+            </button>
           </div>
         )}
       </header>
 
-      {/* Hero */}
-      <section className="bg-gray-50">
-        <div className="container mx-auto flex flex-col md:flex-row items-center px-6 py-12 gap-10">
+      {/* Hero Section */}
+      <section id="hero" className="bg-gradient-to-r from-orange-50 to-yellow-50 py-16 md:py-24">
+        <div className="container mx-auto flex flex-col md:flex-row items-center px-6 gap-10">
           <div className="flex-1 text-center md:text-left">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug">
-              Feast Your Senses,{" "}
+            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+              Feast Your Senses,
+              <br />
               <span className="text-orange-500">Fast and Fresh</span>
             </h2>
-            <p className="text-gray-600 mt-4">
-              Order restaurant food, takeaway and groceries.
+            <p className="text-gray-600 text-lg mb-6 max-w-lg">
+              Made with love, baked fresh daily — our pukis are the perfect treat for any moment.
+              <br />
+              <span className="font-semibold text-orange-600">Try it once, you’ll be hooked!</span>
             </p>
-            <div className="mt-6 flex">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <input
                 type="text"
-                placeholder="e.g. E4R 3TE"
-                className="flex-1 border rounded-l-lg px-4 py-3 focus:outline-none"
+                placeholder="Enter your location..."
+                className="flex-1 px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
-              <button className="bg-orange-500 text-white px-6 rounded-r-lg hover:bg-orange-600">
-                Search
+              <button className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition font-medium shadow-md">
+                Find Nearby
               </button>
             </div>
           </div>
           <div className="flex-1">
             <Image
-              src="/images/hero.png"
-              alt="Hero"
+              src="/bannerLP.jpeg"
+              alt="Fresh Pukis Ipeng - Handmade & Delicious"
               width={500}
               height={400}
-              className="object-contain mx-auto"
+              className="rounded-xl shadow-2xl object-cover w-full h-auto"
             />
           </div>
         </div>
       </section>
 
-      {/* Deals */}
-      <section className="container mx-auto px-6 py-12">
-        <h3 className="text-xl font-bold mb-6">
-          🔥 Up to -40% Order.uk exclusive deals
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((item) => (
-            <div key={item} className="bg-white shadow rounded-lg overflow-hidden">
-              <Image
-                src={`/images/deal${item}.png`}
-                alt="Deal"
-                width={400}
-                height={250}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h4 className="font-semibold text-gray-800">Restaurant {item}</h4>
-                <p className="text-gray-500 text-sm">London</p>
+      {/* Our Outlet */}
+      <section id="outlets" className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <h3 className="text-2xl font-bold text-center mb-10 text-gray-800 flex items-center justify-center gap-2">
+            <MapPin size={24} /> Our Physical Outlets
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1].map((item) => (
+              <div
+                key={item}
+                className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition transform hover:-translate-y-1"
+              >
+                <Image
+                  src={`/outlet/outlet${item}.jpeg`}
+                  alt={`Outlet ${item}`}
+                  width={400}
+                  height={250}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h4 className="font-semibold text-gray-800 text-lg">Outlet {item}</h4>
+                  <p className="text-gray-600 mt-2">Jl. Dr. Angka No. 123, Jakarta</p>
+                  <p className="text-sm text-orange-500 mt-2">Open: 8 AM – 10 PM</p>
+                  <button className="mt-4 text-sm text-orange-500 hover:underline">
+                    View on Map
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="container mx-auto px-6 py-12">
-        <h3 className="text-xl font-bold mb-6">Order.uk Popular Categories 🍴</h3>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-          {["Burgers", "Salads", "Pasta", "Pizza", "Breakfast", "Soups"].map(
-            (cat, idx) => (
+      {/* Menu Categories */}
+      <section id="menu" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h3 className="text-2xl font-bold text-center mb-10 text-gray-800 flex items-center justify-center gap-2">
+            <Truck size={24} /> Explore Our Menu
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {[
+              "Pukis Custom 1",
+              "Pukis Custom 2",
+              "Pukis Pandan",
+              "Pukis Original",
+              "Pukis Keju",
+              "Pukis Coklat",
+            ].map((cat, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-lg shadow text-center p-4 hover:shadow-md transition"
+                className="bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer transform hover:-translate-y-1 group"
               >
                 <Image
-                  src={`/images/cat${idx + 1}.png`}
+                  src={`/menu/cat${idx + 1}.jpeg`}
                   alt={cat}
                   width={100}
                   height={100}
-                  className="mx-auto mb-2"
+                  className="mx-auto mb-2 object-contain group-hover:scale-105 transition"
                 />
-                <p className="text-sm font-medium">{cat}</p>
+                <p className="text-center text-sm font-medium text-gray-700">{cat}</p>
               </div>
-            )
-          )}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Popular Restaurants */}
-      <section className="container mx-auto px-6 py-12">
-        <h3 className="text-xl font-bold mb-6">Popular Restaurants</h3>
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
-          {["mcd.png", "papa.png", "kfc.png", "texas.png", "burger.png", "shaurma.png"].map(
-            (logo, idx) => (
-              <div key={idx} className="bg-white shadow rounded-lg p-4 flex items-center justify-center">
-                <Image src={`/images/${logo}`} alt="Brand" width={80} height={80} />
+      {/* Online Order Partners */}
+      <section id="order" className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <h3 className="text-2xl font-bold text-center mb-10 text-gray-800 flex items-center justify-center gap-2">
+            <Gift size={24} /> Available on Popular Platforms
+          </h3>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 justify-center">
+            {["gofood.png", "grabfood.png", "shopeefood.png"].map((logo, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-50 p-4 rounded-lg flex items-center justify-center hover:bg-orange-50 transition duration-300"
+              >
+                <Image
+                  src={`/icons/${logo}`}
+                  alt={logo}
+                  width={80}
+                  height={80}
+                  className="object-contain"
+                />
               </div>
-            )
-          )}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Promo Banner */}
-      <section className="bg-gray-100 px-6 py-12">
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-10">
-          <div className="flex-1">
-            <h2 className="text-3xl font-bold">
-              Order<span className="text-orange-500">ing</span> is more{" "}
-              <span className="text-orange-500">Personalised</span> & Instant
+      <section className="py-16 bg-gradient-to-r from-orange-400 to-red-500 text-white">
+        <div className="container mx-auto flex flex-col md:flex-row items-center px-6 gap-10">
+          <div className="flex-1 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ordering is More <span className="text-yellow-200">Personalized & Instant</span>
             </h2>
-            <p className="text-gray-600 mt-4">
-              Download the Order.uk app for faster ordering
+            <p className="text-lg mb-6 opacity-90">
+              Download our app for exclusive discounts, faster delivery, and personalized recommendations.
             </p>
-            <div className="flex gap-4 mt-4">
-              <Image src="/images/appstore.png" alt="App Store" width={150} height={50} />
-              <Image src="/images/playstore.png" alt="Play Store" width={150} height={50} />
-            </div>
           </div>
           <div className="flex-1">
-            <Image src="/images/banner.png" alt="Promo" width={500} height={300} />
+            <Image
+              src="/images/banner.png"
+              alt="Promo Banner"
+              width={500}
+              height={300}
+              className="rounded-xl shadow-2xl object-cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* Partner / Rider */}
-      <section className="container mx-auto px-6 py-12 grid md:grid-cols-2 gap-6">
-        <div className="relative bg-black text-white rounded-lg overflow-hidden">
-          <Image src="/images/partner.png" alt="Partner" fill className="object-cover opacity-40" />
-          <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
-            <h3 className="text-xl font-bold">Partner with us</h3>
-            <button className="mt-4 bg-orange-500 px-6 py-2 rounded-lg">Get Started</button>
+      {/* Partner & Rider */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-8">
+          <div className="relative bg-black text-white rounded-xl overflow-hidden">
+            <Image
+              src="/images/partner.png"
+              alt="Partner"
+              fill
+              className="object-cover opacity-60"
+            />
+            <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">Become a Partner</h3>
+              <p className="text-gray-300 mb-6">Grow your business with our nationwide delivery network.</p>
+              <button className="bg-orange-500 px-6 py-3 rounded-lg text-white font-medium hover:bg-orange-600 transition">
+                Apply Now
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="relative bg-black text-white rounded-lg overflow-hidden">
-          <Image src="/images/rider.png" alt="Rider" fill className="object-cover opacity-40" />
-          <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
-            <h3 className="text-xl font-bold">Ride with us</h3>
-            <button className="mt-4 bg-orange-500 px-6 py-2 rounded-lg">Get Started</button>
+          <div className="relative bg-black text-white rounded-xl overflow-hidden">
+            <Image
+              src="/images/rider.png"
+              alt="Rider"
+              fill
+              className="object-cover opacity-60"
+            />
+            <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">Work as a Rider</h3>
+              <p className="text-gray-300 mb-6">Earn extra income by delivering delicious pukis.</p>
+              <button className="bg-orange-500 px-6 py-3 rounded-lg text-white font-medium hover:bg-orange-600 transition">
+                Join Now
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="container mx-auto px-6 py-12">
-        <h3 className="text-xl font-bold mb-6">Know more about us!</h3>
-        <div className="space-y-4">
-          {[
-            "How does Order.uk work?",
-            "What payment methods are accepted?",
-            "Can I track my order in real-time?",
-            "Are there discounts available?",
-          ].map((faq, idx) => (
-            <button
-              key={idx}
-              className="w-full text-left bg-orange-100 px-4 py-3 rounded-lg font-medium hover:bg-orange-200"
-            >
-              {faq}
-            </button>
-          ))}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <h3 className="text-2xl font-bold text-center mb-10 text-gray-800 flex items-center justify-center gap-2">
+            <Phone size={24} /> Frequently Asked Questions
+          </h3>
+          <div className="space-y-4 max-w-2xl mx-auto">
+            {[
+              "How does ordering work?",
+              "What payment methods do you accept?",
+              "Can I track my order in real-time?",
+              "Are there any discounts or promotions?",
+            ].map((faq, idx) => (
+              <button
+                key={idx}
+                className="w-full text-left bg-orange-50 px-6 py-4 rounded-xl font-medium hover:bg-orange-100 transition"
+              >
+                {faq}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="bg-orange-500 text-white py-12">
-        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="py-16 bg-orange-500 text-white">
+        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <h4 className="text-3xl font-bold">546+</h4>
-            <p className="text-sm">Registered Riders</p>
+            <p className="text-sm opacity-90">Registered Riders</p>
           </div>
           <div>
-            <h4 className="text-3xl font-bold">789,900+</h4>
-            <p className="text-sm">Orders Delivered</p>
+            <h4 className="text-3xl font-bold">789K+</h4>
+            <p className="text-sm opacity-90">Orders Delivered</p>
           </div>
           <div>
             <h4 className="text-3xl font-bold">690+</h4>
-            <p className="text-sm">Restaurants Partnered</p>
+            <p className="text-sm opacity-90">Restaurants Partnered</p>
           </div>
           <div>
-            <h4 className="text-3xl font-bold">17,457+</h4>
-            <p className="text-sm">Food Items</p>
+            <h4 className="text-3xl font-bold">17K+</h4>
+            <p className="text-sm opacity-90">Food Items</p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-auto">
+      <footer className="bg-gray-900 text-white py-10">
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h5 className="font-bold mb-3">OrderUK</h5>
+            <h5 className="font-bold text-lg mb-4">Pukis Ipeng</h5>
             <p className="text-gray-400 text-sm">
-              Best food ordering service in town.
+              Fresh, delicious, and delivered fast. Your favorite pukis, anytime.
             </p>
           </div>
           <div>
-            <h5 className="font-bold mb-3">Legal Pages</h5>
+            <h5 className="font-bold mb-4">Legal</h5>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Cookies</a></li>
+              <li><a href="#" className="hover:text-orange-400">Terms & Conditions</a></li>
+              <li><a href="#" className="hover:text-orange-400">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-orange-400">Cookies</a></li>
             </ul>
           </div>
           <div>
-            <h5 className="font-bold mb-3">Follow Us</h5>
+            <h5 className="font-bold mb-4">Follow Us</h5>
             <div className="flex space-x-4">
-              <a href="#">FB</a>
-              <a href="#">IG</a>
-              <a href="#">TW</a>
-            </div>
-          </div>
-          <div>
-            <h5 className="font-bold mb-3">Subscribe</h5>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="px-3 py-2 rounded-l-lg text-black"
-              />
-              <button className="bg-orange-500 px-4 rounded-r-lg">
-                Go
-              </button>
+              <a href="#" className="text-gray-400 hover:text-orange-400">Facebook</a>
+              <a href="#" className="text-gray-400 hover:text-orange-400">Instagram</a>
+              <a href="#" className="text-gray-400 hover:text-orange-400">Tiktok</a>
             </div>
           </div>
         </div>
-        <p className="text-center text-gray-500 text-sm mt-6">
-          © 2024 OrderUK. All rights reserved.
+        <p className="text-center text-gray-500 text-sm mt-8">
+          © 2024 Pukis Ipeng. All rights reserved.
         </p>
       </footer>
     </div>
