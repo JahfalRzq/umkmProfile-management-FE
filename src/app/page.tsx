@@ -35,7 +35,7 @@ export default function Home() {
 
         <div className="mt-8 space-y-4">
           <a
-            href="https://wa.me/6281234567890"
+            href="/landing-page"
             className="block w-full bg-white text-gray-900 font-semibold py-3 rounded-2xl shadow hover:bg-gray-200 transition"
           >
             Website
