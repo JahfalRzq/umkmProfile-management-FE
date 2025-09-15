@@ -233,68 +233,45 @@ export default function Home() {
 {/* menu */}
 
 {isModalMenu && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-    <div className="bg-white rounded-2xl p-6 w-80 text-center shadow-xl">
-      <h2 className="text-lg font-bold mb-4 text-gray-800">Menu Tersedia</h2>
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 overflow-y-auto">
+    <div className="bg-white rounded-2xl p-6 w-[95%] max-w-3xl text-center shadow-xl">
+      <h2 className="text-lg font-bold mb-6 text-gray-800">Menu Tersedia</h2>
 
-      <div className="space-y-4">
-    {/* Instagram */}
-<a
-  href="https://gofood.link/umkm-pukis"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-green-500 text-green-600 font-semibold py-3 px-4 rounded-2xl hover:bg-green-50 transition shadow-sm"
->
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 flex-shrink-0">
-    <Image
-      src="/icons/gofood.png"
-      alt="GoFood"
-      width={24}
-      height={24}
-      className="object-contain"
-    />
-  </div>
-  <span className="text-base">Pukis Original</span>
-</a>
+      {/* Grid Produk */}
+      <div className="grid grid-cols-2 gap-6">
+        {[
+          { name: "Pukis Original",img: "/assets/aset_pukis/pukis5.png" },
+          { name: "Pukis Keju",img: "/assets/aset_pukis/pukis2.png" },
+          { name: "Pukis Coklat",img: "/assets/aset_pukis/pukis1.png" },
+          { name: "Pukis Pandan",img: "/assets/aset_pukis/pukis6.png" },
+          { name: "Pukis Oreo",img: "/assets/aset_pukis/pukis4.png" },
+          { name: "Pukis Custom",img: "/assets/aset_pukis/pukis7.png" },
 
-{/* Tiktok */}
-<a
-  href="https://shopeefood.link/umkm-pukis"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-orange-500 text-orange-600 font-semibold py-3 px-4 rounded-2xl hover:bg-orange-50 transition shadow-sm"
->
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 flex-shrink-0">
-    <Image
-      src="/icons/shopeefood.png"
-      alt="Shopee Food"
-      width={24}
-      height={24}
-      className="object-contain"
-    />
-  </div>
-  <span className="text-base">Pukis Coklat</span>
-</a>
+        ].map((item, idx) => (
+          <div
+            key={idx}
+            className="bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer overflow-hidden group"
+          >
+            {/* Gambar Produk */}
+            <Image
+              src={item.img}
+              alt={item.name}
+              width={300}
+              height={200}
+              className="w-full h-40 object-cover group-hover:scale-105 transition"
+            />
 
-{/* Facebook */}
-<a
-  href="https://grab.link/umkm-pukis"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-green-600 text-green-700 font-semibold py-3 px-4 rounded-2xl hover:bg-green-50 transition shadow-sm"
->
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 flex-shrink-0">
-    <Image
-      src="/icons/grabfood.png"
-      alt="GrabFood"
-      width={24}
-      height={24}
-      className="object-contain"
-    />
-  </div>
-  <span className="text-base">Pukis Keju</span>
-</a>
-
+            {/* Nama + Harga */}
+            <div className="py-2">
+              <p className="text-center text-sm font-semibold text-gray-700">
+                {item.name}
+              </p>
+              {/* <p className="text-center text-xs font-bold text-orange-500">
+                {item.price}
+              </p> */}
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Tombol Tutup */}
@@ -307,6 +284,7 @@ export default function Home() {
     </div>
   </div>
 )}
+
     </div>
   );
 }
