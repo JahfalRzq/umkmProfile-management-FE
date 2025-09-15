@@ -160,63 +160,62 @@ export default function Home() {
       <h2 className="text-lg font-bold mb-4 text-gray-800">Pilih Media Sosial</h2>
 
       <div className="space-y-4">
-    {/* Instagram */}
-<a
-  href="https://gofood.link/umkm-pukis"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-green-500 text-green-600 font-semibold py-3 px-4 rounded-2xl hover:bg-green-50 transition shadow-sm"
->
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 flex-shrink-0">
-    <Image
-      src="/icons/gofood.png"
-      alt="GoFood"
-      width={24}
-      height={24}
-      className="object-contain"
-    />
-  </div>
-  <span className="text-base">Instagram</span>
-</a>
+        {/* Instagram */}
+        <a
+          href="https://instagram.com/umkm-pukis"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-start gap-3 w-full bg-white border-2 border-pink-500 text-pink-600 font-semibold py-3 px-4 rounded-2xl hover:bg-pink-50 transition shadow-sm"
+        >
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-pink-100 flex-shrink-0">
+            <Image
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+              alt="Instagram"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          </div>
+          <span className="text-base">Instagram</span>
+        </a>
 
-{/* Tiktok */}
-<a
-  href="https://shopeefood.link/umkm-pukis"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-orange-500 text-orange-600 font-semibold py-3 px-4 rounded-2xl hover:bg-orange-50 transition shadow-sm"
->
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 flex-shrink-0">
-    <Image
-      src="/icons/shopeefood.png"
-      alt="Shopee Food"
-      width={24}
-      height={24}
-      className="object-contain"
-    />
-  </div>
-  <span className="text-base">Tiktok</span>
-</a>
+        {/* TikTok */}
+        <a
+          href="https://tiktok.com/@umkm-pukis"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-start gap-3 w-full bg-white border-2 border-black text-black font-semibold py-3 px-4 rounded-2xl hover:bg-gray-50 transition shadow-sm"
+        >
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 flex-shrink-0">
+            <Image
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+              alt="TikTok"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          </div>
+          <span className="text-base">TikTok</span>
+        </a>
 
-{/* Facebook */}
-<a
-  href="https://grab.link/umkm-pukis"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex items-center justify-start gap-3 w-full bg-white border-2 border-green-600 text-green-700 font-semibold py-3 px-4 rounded-2xl hover:bg-green-50 transition shadow-sm"
->
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 flex-shrink-0">
-    <Image
-      src="/icons/grabfood.png"
-      alt="GrabFood"
-      width={24}
-      height={24}
-      className="object-contain"
-    />
-  </div>
-  <span className="text-base">Facebook</span>
-</a>
-
+        {/* Facebook */}
+        <a
+          href="https://facebook.com/umkm-pukis"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-start gap-3 w-full bg-white border-2 border-blue-600 text-blue-600 font-semibold py-3 px-4 rounded-2xl hover:bg-blue-50 transition shadow-sm"
+        >
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 flex-shrink-0">
+            <Image
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+              alt="Facebook"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          </div>
+          <span className="text-base">Facebook</span>
+        </a>
       </div>
 
       {/* Tombol Tutup */}
@@ -229,6 +228,7 @@ export default function Home() {
     </div>
   </div>
 )}
+
 
 {/* menu */}
 
