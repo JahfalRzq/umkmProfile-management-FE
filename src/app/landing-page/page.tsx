@@ -121,7 +121,7 @@ export default function LandingPage() {
               <br />
               <span className="font-semibold text-orange-600">Try it once, you’ll be hooked!</span>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <input
                 type="text"
                 placeholder="Enter your location..."
@@ -130,7 +130,7 @@ export default function LandingPage() {
               <button className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition font-medium shadow-md">
                 Find Nearby
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="flex-1">
             <Image
@@ -178,37 +178,49 @@ export default function LandingPage() {
       </section>
 
       {/* Menu Categories */}
-      <section id="menu" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h3 className="text-2xl font-bold text-center mb-10 text-gray-800 flex items-center justify-center gap-2">
-            <Truck size={24} /> Explore Our Menu
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {[
-              "Pukis Custom 1",
-              "Pukis Custom 2",
-              "Pukis Pandan",
-              "Pukis Original",
-              "Pukis Keju",
-              "Pukis Coklat",
-            ].map((cat, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer transform hover:-translate-y-1 group"
-              >
-                <Image
-                  src={`/menu/cat${idx + 1}.jpeg`}
-                  alt={cat}
-                  width={100}
-                  height={100}
-                  className="mx-auto mb-2 object-contain group-hover:scale-105 transition"
-                />
-                <p className="text-center text-sm font-medium text-gray-700">{cat}</p>
-              </div>
-            ))}
+<section id="menu" className="py-16 bg-gray-50">
+  <div className="container mx-auto px-6">
+    {/* Judul Section */}
+    <h3 className="text-2xl font-bold text-center mb-10 text-gray-800 flex items-center justify-center gap-2">
+      <Truck size={24} /> Explore Our Menu
+    </h3>
+
+    {/* Grid Produk */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-6">
+      {[
+        { name: "Pukis Original", img: "/assets/aset_pukis/pukis5.png" },
+        { name: "Pukis Keju", img: "/assets/aset_pukis/pukis2.png" },
+        { name: "Pukis Coklat", img: "/assets/aset_pukis/pukis1.png" },
+        { name: "Pukis Pandan", img: "/assets/aset_pukis/pukis6.png" },
+        { name: "Pukis Oreo", img: "/assets/aset_pukis/pukis4.png" },
+        { name: "Pukis Custom", img: "/assets/aset_pukis/pukis7.png" },
+      ].map((item, idx) => (
+        <div
+          key={idx}
+          className="bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer overflow-hidden group"
+        >
+          {/* Gambar Produk */}
+          <Image
+            src={item.img}
+            alt={item.name}
+            width={300}
+            height={200}
+            className="w-full h-48 object-cover group-hover:scale-105 transition"
+          />
+
+          {/* Nama Produk */}
+          <div className="py-2">
+            <p className="text-center text-sm font-semibold text-gray-700">
+              {item.name}
+            </p>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
       {/* Online Order Partners */}
       <section id="order" className="py-16 bg-white">
